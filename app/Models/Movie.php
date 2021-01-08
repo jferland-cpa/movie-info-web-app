@@ -11,11 +11,13 @@ class Movie extends Model
     }
 
     public function writers() {
-        return $this->belongsToMany(Writer::class, "movie_writers", "movie_id", "writer_id");
+        return $this->belongsToMany(Writer::class, "movie_writers", "movie_id", "writer_id")
+            ->withPivot("specialization");
     }
 
     public function stars() {
-        return $this->belongsToMany(Star::class, "movie_stars", "movie_id", "star_id");
+        return $this->belongsToMany(Star::class, "movie_stars", "movie_id", "star_id")
+            ->withPivot("role");
     }
 
     public function genres() {
