@@ -33,10 +33,12 @@ class MovieController extends Controller
             $return_data["directors"] []= $director->first_name . " " . $director->last_name;
         }
         foreach ($movie->writers as $writer) {
-            $return_data["writers"] []= $writer->first_name . " " . $writer->last_name;
+            $return_data["writers"] []= $writer->first_name . " " . $writer->last_name
+                . " (" . $writer->pivot->specialization . ")";
         }
         foreach ($movie->stars as $star) {
-            $return_data["stars"] []= $star->first_name . " " . $star->last_name;
+            $return_data["stars"] []= $star->first_name . " " . $star->last_name
+                . " (" . $star->pivot->role . ")";
         }
         foreach ($movie->genres as $genre) {
             $return_data["genres"] []= $genre->name;
@@ -47,12 +49,7 @@ class MovieController extends Controller
         foreach ($movie->languages as $language) {
             $return_data["languages"] []= $language->name;
         }
-        //return response($return_data);
-        $hparray = [];
-        foreach ($movie->stars as $star) {
-            $hparray []= $star->pivot->role;
-        }
-        return response($hparray);
+        return response($return_data);
     }
 
     /**
