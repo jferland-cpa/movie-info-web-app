@@ -23,22 +23,32 @@ class MovieController extends Controller
             "writers" => [],
             "stars" => [],
             "genres" => [],
-            "rating" => $rating_string,
+            "rating_value" => $movie->rating_value,
+            "rating_description" => $movie->rating_description,
             "countries" => [],
             "languages" => [],
             "release_date" => $movie->release_date,
             "runtime" => $movie->runtime
         ];
         foreach ($movie->directors as $director) {
-            $return_data["directors"] []= $director->first_name . " " . $director->last_name;
+            $return_data["directors"] []= [
+                "first_name" => $director->first_name, 
+                "last_name" => $director->last_name
+            ];
         }
         foreach ($movie->writers as $writer) {
-            $return_data["writers"] []= $writer->first_name . " " . $writer->last_name
-                . " (" . $writer->pivot->specialization . ")";
+            $return_data["writers"] []= [
+                "first_name" => $writer->first_name, 
+                "last_name" => $writer->last_name, 
+                "specialization" => $writer->pivot->specialization
+            ];
         }
         foreach ($movie->stars as $star) {
-            $return_data["stars"] []= $star->first_name . " " . $star->last_name
-                . " (" . $star->pivot->role . ")";
+            $return_data["stars"] []= [
+                "first_name" => $star->first_name,
+                "last_name" => $star->last_name,
+                "role" => $star->pivot->role
+            ];
         }
         foreach ($movie->genres as $genre) {
             $return_data["genres"] []= $genre->name;
@@ -53,16 +63,6 @@ class MovieController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,7 +70,7 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
