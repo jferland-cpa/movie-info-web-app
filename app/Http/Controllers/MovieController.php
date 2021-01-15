@@ -21,7 +21,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movie = Movie::find(19);
+        $movie = Movie::find(27);
         $return_data = [
             "title" => $movie->title,
             "description" => $movie->description,
@@ -115,7 +115,7 @@ class MovieController extends Controller
             ])->first();
             
             if ($existing_writer) {
-                if ($writer["specialization"]) {
+                if (isset($writer["specialization"])) {
                     $new_movie->writers()->attach($existing_writer->id, [
                         "specialization" => $writer["specialization"]
                     ]);
@@ -128,7 +128,7 @@ class MovieController extends Controller
                     "last_name" => $writer["last_name"]
                 ]);
 
-                if ($writer["specialization"]) {
+                if (isset($writer["specialization"])) {
                     $new_movie->writers()->updateExistingPivot($new_writer->id, [
                         "specialization" => $writer["specialization"]
                     ]);
@@ -157,7 +157,7 @@ class MovieController extends Controller
                 ]);
 
                 if ($star["role"]) {
-                    $new_movie->stars()->updateExistingPivot($new_writer->id, [
+                    $new_movie->stars()->updateExistingPivot($new_star->id, [
                         "role" => $star["role"]
                     ]);
                 }
