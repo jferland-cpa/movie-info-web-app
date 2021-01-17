@@ -21,7 +21,14 @@ class MovieController extends Controller
      */
     public function index()
     {
-        
+        $movie_list = Movie::select("title")->get();
+        if ($movie_list) {
+            $return_msg = response($movie_list, 200);
+        } else {
+            $return_msg = response("There are currently no movies existing in the system", 404);
+        }
+
+        return $return_msg;
     }
 
     /**
@@ -33,7 +40,7 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         if (Movie::where("title", $request->title)->first()) {
-            $return_msg = response("Cannot add an already existing movie", 500);
+            $return_msg = response("Cannot add an already existing movie", 409);
         } else {
             $new_movie = new Movie;
             $new_movie->title = $request->title;
