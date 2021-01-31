@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Movie;
 use Illuminate\Support\Carbon;
+use App\Models\Movie;
 use App\Models\Director;
 use App\Models\Writer;
 use App\Models\Star;
