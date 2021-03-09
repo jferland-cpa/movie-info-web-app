@@ -21,7 +21,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movie_list = Movie::select("title")->get();
+        $movie_list = Movie::select("title", "image_filename")->get();
         if ($movie_list) {
             $return_msg = response($movie_list, 200);
         } else {

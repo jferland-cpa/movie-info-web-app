@@ -5,7 +5,7 @@
             <div v-for="(movie, index) in movies" :key="index" class="col-md-4">
                 <div class="card movie-card">
                     <div class="card-body">
-                        <p>{{ movie.title }}</p>
+                        <img :src="'storage/imgs/' + movie.image_filename + '.jpg'" :title="movie.title" :alt="movie.title">
                     </div>
                 </div>
             </div>
@@ -37,8 +37,15 @@
 </script>
 
 <style scoped>
+    img {
+        height: 368px;
+        width: 238px;
+    }
+
     .movie-card {
         height: 400px;
-        width: 250px;
+        width: 270px;
+        margin-top: 1em;
+        border: 0px;
     }
 </style>
