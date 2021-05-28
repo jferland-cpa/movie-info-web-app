@@ -50,6 +50,7 @@
         height: 400px;
         width: 270px;
         margin-top: 1em;
+        border: 0px;
     }
 
     .add-movie {
